@@ -149,7 +149,8 @@ def download_audio(root: tk.Tk, url: str, folder: str) -> None:
 
     ydl_opts = {
         "format": "bestaudio/best",
-        'noplaylist': True,  # Masaüstünün dolmasını engelleyen kritik ayar
+        "noplaylist": True,  # Masaüstünün dolmasını engelleyen kritik ayar
+        "ffmpeg_location": '/opt/homebrew/bin',
         "outtmpl": os.path.join(folder, "%(title)s.%(ext)s"),
         "postprocessors": [
             {

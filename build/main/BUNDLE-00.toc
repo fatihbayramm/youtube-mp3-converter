@@ -1,0 +1,1 @@
+([('main', '/Users/fatihbayram/python/mp3_converter/dist/main', 'EXECUTABLE')],)
