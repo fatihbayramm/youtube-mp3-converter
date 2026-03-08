@@ -37,7 +37,17 @@ def create_ui(root: tk.Tk) -> None:
         relief="sunken",
         anchor="w",
     )
-    folder_label.grid(row=3, column=0, columnspan=2, sticky="we", pady=(4, 8))
+    folder_label.grid(
+        row=3,
+        column=0,
+        columnspan=2,
+        sticky="we",
+        padx=(0, 4),  # Butonla arasında küçük boşluk
+        pady=(4, 8),
+    )
+    # Input alanına da tıklayınca klasör seçici açılsın
+    folder_label.bind("<Button-1>", lambda _event: select_folder(root))
+    folder_label.configure(cursor="hand2")
 
     select_btn = ttk.Button(
         main_frame,
@@ -45,7 +55,7 @@ def create_ui(root: tk.Tk) -> None:
         command=lambda: select_folder(root),
         width=14,
     )
-    select_btn.grid(row=3, column=2, sticky="e")
+    select_btn.grid(row=3, column=2, sticky="e", pady=(4, 8))
 
     # Progress bar
     ttk.Label(main_frame, text="İlerleme:").grid(row=4, column=0, sticky="w")
