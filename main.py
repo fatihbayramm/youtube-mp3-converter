@@ -1,12 +1,38 @@
 import os
+import sys
 import threading
+import shutil
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
-
 import yt_dlp
 
 ## TODO: uygulama haline getir masaustunde dursun hep hem mac icin hem de windows icin (.exe)
 ## TODO: ffmpeg yolunu otomatik bulmali her pc de onun icin bir metod ekle.
+
+
+def get_ffmpeg_path():
+    """FFmpeg yolunu otomatik olarak belirler."""
+    
+    # 1. Senaryo: PyInstaller ile paketlenmiş uygulama içindeyiz
+    if hasattr(sys, '_MEIPASS'):
+        # Paket içindeki geçici klasör yolunu al
+        bundle_dir = sys._MEIPASS
+        ffmpeg_bin = os.path.join(bundle_dir, 'ffmpeg')
+        
+        # Eğer paket içinde ffmpeg varsa orayı döndür
+        if os.path.exists(ffmpeg_bin):
+            return bundle_dir # yt-dlp'ye klasör yolu lazım
+            
+    # 2. Senaryo: Geliştirme aşamasındayız veya sistemde yüklü olanı kullanacağız
+    system_ffmpeg = shutil.which('ffmpeg')
+    if system_ffmpeg:
+        # shutil.which tam yolu verir (örn: /opt/homebrew/bin/ffmpeg)
+        # Bize sadece klasör yolu lazım
+        return os.path.dirname(system_ffmpeg)
+        
+    # Bulunamazsa None döndürür (Hata yönetimi için)
+    return None
+
 
 def create_ui(root: tk.Tk) -> None:
     root.title("YouTube MP3 Converter")
@@ -126,6 +152,8 @@ def start_download_thread(root: tk.Tk) -> None:
 
 
 def download_audio(root: tk.Tk, url: str, folder: str) -> None:
+    ffmpeg_dir = get_ffmpeg_path()
+
     def update_status(text: str) -> None:
         root.after(0, lambda: root.status_var.set(text))
 
@@ -150,7 +178,7 @@ def download_audio(root: tk.Tk, url: str, folder: str) -> None:
     ydl_opts = {
         "format": "bestaudio/best",
         "noplaylist": True,  # Masaüstünün dolmasını engelleyen kritik ayar
-        "ffmpeg_location": '/opt/homebrew/bin',
+        'ffmpeg_location': ffmpeg_dir, # İşte burası artık otomatik!
         "outtmpl": os.path.join(folder, "%(title)s.%(ext)s"),
         "postprocessors": [
             {

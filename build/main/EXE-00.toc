@@ -54,7 +54,7 @@
  [],
  False,
  False,
- 1772997214,
+ 1772999595,
  [('runw',
    '/Users/fatihbayram/python/mp3_converter/.venv/lib/python3.14/site-packages/PyInstaller/bootloader/Darwin-64bit/runw',
    'EXECUTABLE')],
