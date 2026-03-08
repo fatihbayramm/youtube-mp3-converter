@@ -1,43 +1,44 @@
 ## YouTube MP3 Converter
 
-YouTube MP3 Converter, YouTube videolarını hızlıca **MP3 formatına dönüştürüp masaüstünüze kaydetmenizi** sağlayan basit bir masaüstü uygulamasıdır.
+YouTube MP3 Converter is a small desktop application that lets you quickly **download YouTube videos as MP3 files** to your computer.
 
-### Özellikler
+### Features
 
-- **Grafik arayüz**: `tkinter` ve `ttk` ile hazırlanmış sade, modern arayüz
-- **YouTube → MP3 dönüştürme**: `yt-dlp` ve `ffmpeg` kullanarak en iyi ses akışını MP3'e çevirir
-- **İlerleme takibi**: İlerleme çubuğu ve durum metni ile indirme/dönüştürme durumunu gösterir
-- **Klasör seçimi**: Varsayılan olarak masaüstüne indirir, istenirse farklı klasör seçilebilir
+- **GUI**: Simple, modern interface built with `tkinter` and `ttk`
+- **YouTube → MP3 conversion**: Uses `yt-dlp` and `ffmpeg` to extract the best audio stream as MP3
+- **Progress tracking**: Progress bar and status text show download and conversion state
+- **Folder selection**: Downloads to the desktop by default, or to any folder you choose
 
-### Kullanılan teknolojiler
+### Tech stack
 
 - **Python 3**
-- **tkinter / ttk** – masaüstü kullanıcı arayüzü
-- **yt-dlp** – YouTube indirme ve ses ayrıştırma
-- **ffmpeg** – ses dönüştürme (MP3 çıkarma)
+- **tkinter / ttk** – desktop UI
+- **yt-dlp** – YouTube download and audio extraction
+- **ffmpeg** – audio conversion (to MP3)
 
-### Kurulum
+### Installation
 
 ```bash
 cd python/mp3_converter
 python -m venv .venv
-source .venv/bin/activate  # Windows için: .venv\Scripts\activate
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-`yt-dlp`, MP3 dönüştürme için sisteminizde **ffmpeg** kurulu olmasını ister:
+`yt-dlp` requires **ffmpeg** to be installed on your system for MP3 conversion:
 
 - macOS: `brew install ffmpeg`
-- Linux: `sudo apt install ffmpeg` (veya dağıtımınıza uygun komut)
-- Windows: ffmpeg indirip `PATH` değişkenine ekleyin
+- Linux: `sudo apt install ffmpeg` (or your distro’s equivalent)
+- Windows: download ffmpeg and add it to your `PATH`
 
-### Çalıştırma ve kullanım
+### Run & usage
 
 ```bash
 python main.py
 ```
 
-- YouTube video URL'sini üstteki alana yapıştırın.
-- `Klasör Seç` ile kaydedilecek klasörü seçin (varsayılan: masaüstü).
-- `MP3 Olarak İndir` butonuna basın.
-- İlerleme çubuğu ve durum metni, indirme ve dönüştürme sürecini gösterecektir; bittiğinde bilgilendirme penceresi çıkar.
+- Paste a YouTube video URL into the top input field.
+- Use `Klasör Seç` (Select Folder) to pick the output directory (defaults to Desktop).
+- Click `MP3 Olarak İndir` (Download as MP3) to start.
+- The progress bar and status text will show the current state; a message box appears when the process finishes.
+
