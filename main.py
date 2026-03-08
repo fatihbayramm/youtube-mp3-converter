@@ -6,8 +6,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import yt_dlp
 
-## TODO: uygulama haline getir masaustunde dursun hep hem mac icin hem de windows icin (.exe)
-## TODO: ffmpeg yolunu otomatik bulmali her pc de onun icin bir metod ekle.
+## TODO: Windows için ayrı bir yapılandırma gerekiyor. Şuan mac için güzel çalışıyor.
 
 
 def get_ffmpeg_path():
