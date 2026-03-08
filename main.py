@@ -6,7 +6,7 @@ from tkinter import filedialog, messagebox, ttk
 import yt_dlp
 
 ## TODO: uygulama haline getir masaustunde dursun hep hem mac icin hem de windows icin (.exe)
-## TODO: Icon uret sonra uygulama haline getirirken ekle o iconu.
+## TODO: ffmpeg yolunu otomatik bulmali her pc de onun icin bir metod ekle.
 
 def create_ui(root: tk.Tk) -> None:
     root.title("YouTube MP3 Converter")
