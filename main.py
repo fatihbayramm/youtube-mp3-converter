@@ -1,5 +1,6 @@
 import os
 import sys
+import certifi
 import ssl
 import threading
 import shutil
@@ -14,6 +15,10 @@ except AttributeError:
     pass
 else:
     ssl._create_default_https_context = _create_unverified_https_context
+
+
+# Python'a sertifikaları nerede bulacağını söyler
+os.environ['SSL_CERT_FILE'] = certifi.where()
 
 ## TODO: Windows için ayrı bir yapılandırma gerekiyor. Şuan mac için güzel çalışıyor.
 
@@ -186,6 +191,7 @@ def download_audio(root: tk.Tk, url: str, folder: str) -> None:
     ydl_opts = {
         "format": "bestaudio/best",
         "noplaylist": True,  # Masaüstünün dolmasını engelleyen kritik ayar
+        'nocheckcertificate': True,  # SSL hatalarını görmezden gelmesi için kritik
         'ffmpeg_location': ffmpeg_dir, # İşte burası artık otomatik!
         "outtmpl": os.path.join(folder, "%(title)s.%(ext)s"),
         "postprocessors": [
