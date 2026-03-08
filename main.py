@@ -5,7 +5,6 @@ from tkinter import filedialog, messagebox, ttk
 
 import yt_dlp
 
-## TODO: varsayilan yol masaustu olacak
 ## TODO: klasor sec dugmeleri ve input arasindaki boslugu arttir
 
 
@@ -17,7 +16,8 @@ def create_ui(root: tk.Tk) -> None:
 
     # State variables
     root.url_var = tk.StringVar()
-    root.folder_var = tk.StringVar(value=os.path.expanduser("~"))
+    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+    root.folder_var = tk.StringVar(value=desktop_path)
     root.status_var = tk.StringVar(value="Hazır")
     root.progress_var = tk.DoubleVar(value=0.0)
 
