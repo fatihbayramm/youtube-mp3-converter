@@ -26,24 +26,17 @@ os.environ['SSL_CERT_FILE'] = certifi.where()
 def get_ffmpeg_path():
     """FFmpeg yolunu otomatik olarak belirler."""
     
-    # 1. Senaryo: PyInstaller ile paketlenmiş uygulama içindeyiz
     if hasattr(sys, '_MEIPASS'):
-        # Paket içindeki geçici klasör yolunu al
         bundle_dir = sys._MEIPASS
         ffmpeg_bin = os.path.join(bundle_dir, 'ffmpeg')
         
-        # Eğer paket içinde ffmpeg varsa orayı döndür
         if os.path.exists(ffmpeg_bin):
-            return bundle_dir # yt-dlp'ye klasör yolu lazım
+            return bundle_dir 
             
-    # 2. Senaryo: Geliştirme aşamasındayız veya sistemde yüklü olanı kullanacağız
     system_ffmpeg = shutil.which('ffmpeg')
     if system_ffmpeg:
-        # shutil.which tam yolu verir (örn: /opt/homebrew/bin/ffmpeg)
-        # Bize sadece klasör yolu lazım
         return os.path.dirname(system_ffmpeg)
         
-    # Bulunamazsa None döndürür (Hata yönetimi için)
     return None
 
 
@@ -81,7 +74,7 @@ def create_ui(root: tk.Tk) -> None:
         column=0,
         columnspan=2,
         sticky="we",
-        padx=(0, 4),  # Butonla arasında küçük boşluk
+        padx=(0, 4),  
         pady=(4, 8),
     )
     # Input alanına da tıklayınca klasör seçici açılsın
@@ -190,9 +183,9 @@ def download_audio(root: tk.Tk, url: str, folder: str) -> None:
 
     ydl_opts = {
         "format": "bestaudio/best",
-        "noplaylist": True,  # Masaüstünün dolmasını engelleyen kritik ayar
-        'nocheckcertificate': True,  # SSL hatalarını görmezden gelmesi için kritik
-        'ffmpeg_location': ffmpeg_dir, # İşte burası artık otomatik!
+        "noplaylist": True,  
+        'nocheckcertificate': True,  
+        'ffmpeg_location': ffmpeg_dir, 
         "outtmpl": os.path.join(folder, "%(title)s.%(ext)s"),
         "postprocessors": [
             {
@@ -202,7 +195,6 @@ def download_audio(root: tk.Tk, url: str, folder: str) -> None:
             }
         ],
         "progress_hooks": [progress_hook],
-        # Quiet terminal output; we show UI status instead
         "quiet": True,
         "no_warnings": True,
     }
@@ -213,7 +205,7 @@ def download_audio(root: tk.Tk, url: str, folder: str) -> None:
             ydl.download([url])
         update_status("Tamamlandı.")
         messagebox.showinfo("Başarılı", "MP3 indirme tamamlandı.")
-    except Exception as exc:  # pylint: disable=broad-except
+    except Exception as exc: 
         update_status("Hata oluştu.")
         messagebox.showerror("Hata", f"İndirme sırasında bir hata oluştu:\n{exc}")
     finally:
