@@ -7,8 +7,8 @@ import yt_dlp
 
 ## TODO: varsayilan yol masaustu olacak
 ## TODO: klasor sec dugmeleri ve input arasindaki boslugu arttir
-## TODO: playlist linki atildiginda tum playlisti indirmeye calismasin sadece o muzigi indirsin
-## TODO: github a at/
+
+
 
 def create_ui(root: tk.Tk) -> None:
     root.title("YouTube MP3 Converter")
@@ -140,6 +140,7 @@ def download_audio(root: tk.Tk, url: str, folder: str) -> None:
 
     ydl_opts = {
         "format": "bestaudio/best",
+        'noplaylist': True,  # Masaüstünün dolmasını engelleyen kritik ayar
         "outtmpl": os.path.join(folder, "%(title)s.%(ext)s"),
         "postprocessors": [
             {
