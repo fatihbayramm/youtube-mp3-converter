@@ -1,10 +1,19 @@
 import os
 import sys
+import ssl
 import threading
 import shutil
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import yt_dlp
+
+# SSL sertifika doğrulamasını global olarak devre dışı bırakır
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
 
 ## TODO: Windows için ayrı bir yapılandırma gerekiyor. Şuan mac için güzel çalışıyor.
 
