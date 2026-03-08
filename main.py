@@ -6,8 +6,7 @@ from tkinter import filedialog, messagebox, ttk
 import yt_dlp
 
 ## TODO: klasor sec dugmeleri ve input arasindaki boslugu arttir
-
-
+## TODO: uygulama haline getir masaustunde dursun hep hem mac icin hem de windows icin (.exe)
 
 def create_ui(root: tk.Tk) -> None:
     root.title("YouTube MP3 Converter")
